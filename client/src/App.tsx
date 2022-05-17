@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <div id="App">
         <Header />
-        <SearchBar/>
+        {/* <SearchBar/> */}
         <NavBar />
         <Home />
         {/* <CategoryPage/> */}

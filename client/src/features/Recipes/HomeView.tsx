@@ -4,11 +4,15 @@ import styled from "styled-components";
 import { Category } from "@mui/icons-material";
 import { Recipe } from "../../interface/recipes";
 import { RecipeList } from "./RecipeList";
+import {SearchBar} from '../Search/SearchBar'
 
 const HomeStyle = styled.main`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* overflow: scroll; */
+
 `;
 
 export const Home = () => {
@@ -23,7 +27,9 @@ export const Home = () => {
 
   return (
     <>
+    
       <HomeStyle>
+        <SearchBar/>
         <RecipeList recipeList={allRecipes} />
       </HomeStyle>
     </>

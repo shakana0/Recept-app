@@ -6,7 +6,9 @@ import * as api from '../../api/index'
 
 const NavStyle = styled.nav`
   background-color: #100703;
-  height: 600px;
+  /* height: 600px; */
+  width: 200px;
+  height: 100%;
   color: white;
   font-family: Roboto, Helvetica, sans-serif;
 

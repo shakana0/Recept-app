@@ -10,7 +10,7 @@ const HeaderStyle = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  height: 80px;
+  /* height: 80px; */
 
 
   svg {
