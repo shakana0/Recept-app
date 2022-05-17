@@ -1,0 +1,35 @@
+#App {
+  background-image: url("./assets/img/arabic-coffee.jpg");
+  background-size: cover;
+  margin: 0;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+header {
+  grid-area: 1 / 1 / 2 / 6;
+}
+nav {
+  grid-area: 2 / 1 / 7 / 2;
+}
+footer {
+  grid-area: 7 / 1 / 8 / 6;
+}
+.search {
+  grid-area: 2 / 3 / 3 / 5;
+}
+main {
+  grid-area: 3 / 2 / 7 / 6;
+}
+
+footer {
+  height: 80px;
+  background-color: black;
+  margin-top: auto;
+  color: white;
+  text-align: center;
+}

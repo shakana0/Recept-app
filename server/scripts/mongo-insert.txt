@@ -1,0 +1,67 @@
+use rumbo
+db.createCollection('employees')
+db.createCollection('projects')
+db.createCollection('settings')
+db.createCollection('time_reports')
+db.createCollection('transactions')
+
+db.projects.insert({customer_name:"Åkeriet", project_name:"Hemsida akeriet.se", agreement_ref:"AK132", active:true, currentDate: new Date()})
+
+db.projects.insert({customer_name:"Storbanken", project_name:"Finanssystemet", agreement_ref:"AK345", active:true, currentDate: new Date()})
+
+--------------- utan ID blir projektid undefined pga hur de har byggt react appen ---------
+vvvv with ids ^^^^ without ids
+db.projects.insert({id:1, customer_name:"Åkeriet", project_name:"Hemsida akeriet.se", agreement_ref:"AK132", active:true, currentDate: new Date()})
+
+db.projects.insert({id:2, customer_name:"Storbanken", project_name:"systemet", agreement_ref:"AK345", active:true, currentDate: new Date()})
+
+db.projects.insert({id:3, customer_name:"Storbanken", project_name:"Finans", agreement_ref:"AK345", active:true, currentDate: new Date()})
+
+
+{
+    id: 1,
+    title: "Spansk kaffedrink",
+    description: "Bjud på en kaffedrink med spansk likör Licor 43 toppad med varmt kaffe och lättvispad grädde. Likören passar utmärkt ihop med kaffesmaken och den krämiga grädden.",
+    imageUrl: "https://receptfavoriter.se/sites/default/files/spanish_coffee_1200_3.jpg",
+    timeInMins: 10,
+    ratings: [4.4],
+    category: ["kaffe"],
+    portioner: "1 glas spansk kaffedrink",
+    ingrediensts:[
+        {
+            ingredient: "spansk likör Liqor",
+            amount: 4,
+            unit: "cl"
+        },
+        {
+            ingredient: "starkt bryggkaffe",
+            amount: 1.5,
+            unit: "dl"
+        },
+        {
+            ingredient: "lättvispad grädde",
+            amount: 4,
+            unit: "msk"
+        },
+        {
+            ingredient: "kaffepulver till garnering",
+            amount: 0.5,
+            unit: "krm"
+        }
+    ]
+    instructions: [
+        "Brygg starkt kaffe. Värm gärna glaset du ska servera kaffet i med hett vatten", 
+        "Vispa grädden löst",
+        "Mät upp likör i ett kaffeglas, glaskupa som tål värme, kaffekopp i glas, stor tekopp i glas eller valfri kopp.",
+        "Fyll på med varmt kaffe.",
+        "Häll eller skeda över grädden.",
+        "Garnera med lite kaffepulver eller annan garnering enligt förslag ovan om du vill."
+    ],
+    comments: [
+        {
+            comments:"Åhh va gott det var!"
+            name: "Mia",
+            createdAt: new date()
+        }
+    ]
+}
