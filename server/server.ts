@@ -13,11 +13,22 @@ import { connect } from 'mongoose';
 //     })
 // })
 
-connect(`mongodb+srv://${process.env.USER2}:${process.env.PASSWORD}@recept-app.gvbqh.mongodb.net/kaffesajten`).then(() =>{
+connect(`mongodb+srv://${process.env.USER2}:${process.env.PASSWORD}@recept-app.gvbqh.mongodb.net/kaffesajten?retryWrites=true&w=majority`).then(() =>{
     app.listen(port, () =>{
         console.log('hello im listening to port ' + port)
     })
 })
+
+
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://shakana:<password>@recept-app.gvbqh.mongodb.net/?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
 
 
 const app = express()
