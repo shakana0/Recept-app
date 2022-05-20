@@ -35,8 +35,8 @@ export const getCategories = async () => {
   const categories = await RecipeModel.aggregate([
     { $match: {} },
     { $unwind: '$category' },
-    { $group: { _id: '$category', count: { $sum: 1 } } }
-    // { $sort: { count: -1 } }
+    { $group: { _id: '$category', count: { $sum: 1 } } },
+    { $sort: { count: -1 } }
 ]);
 return categories
 

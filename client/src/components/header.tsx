@@ -3,6 +3,7 @@ import CoffeeMakerIcon from "@mui/icons-material/CoffeeMaker";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { Button } from "./headerBtn";
+import { Link } from "react-router-dom";
 
 const HeaderStyle = styled.header`
   background-color: black;
@@ -12,9 +13,8 @@ const HeaderStyle = styled.header`
   padding: 1rem;
   /* height: 80px; */
 
-
   svg {
-    transition: .5s ease;
+    transition: 0.5s ease;
     font-size: 30px;
     color: white;
     &:hover {
@@ -22,8 +22,8 @@ const HeaderStyle = styled.header`
     }
   }
   .coffee-icon {
-      font-size: 40px;
-    }
+    font-size: 40px;
+  }
 `;
 
 const DivStyle = styled.header`
@@ -37,7 +37,9 @@ const DivStyle = styled.header`
 export const Header = () => {
   return (
     <HeaderStyle>
-      <CoffeeMakerIcon className="coffee-icon" />
+      <Link to="/">
+        <CoffeeMakerIcon className="coffee-icon" />
+      </Link>
       <DivStyle>
         <FavoriteBorderIcon />
         <PermIdentityIcon />

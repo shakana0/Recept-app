@@ -11,8 +11,6 @@ const HomeStyle = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow: scroll; */
-
 `;
 
 export const Home = () => {
@@ -27,7 +25,6 @@ export const Home = () => {
 
   return (
     <>
-    
       <HomeStyle>
         <SearchBar/>
         <RecipeList recipeList={allRecipes} />

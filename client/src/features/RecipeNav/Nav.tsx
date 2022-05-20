@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import { Recipe } from "../../interface/recipes";
+import { ICategory } from "../../interface/category";
 import { Category } from "@mui/icons-material";
-import * as api from '../../api/index'
+import * as api from "../../api/index";
+import { Link } from "react-router-dom";
 
 const NavStyle = styled.nav`
   background-color: #100703;
@@ -12,6 +13,10 @@ const NavStyle = styled.nav`
   color: white;
   font-family: Roboto, Helvetica, sans-serif;
 
+  a{
+    text-decoration: none;
+    color: white;
+  }
   h2 {
     text-align: center;
   }
@@ -19,60 +24,39 @@ const NavStyle = styled.nav`
     padding: 1rem;
   }
   li {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     margin: 0.5rem;
     &:hover {
       font-weight: 600;
+      cursor: pointer;
+    }
+
+    p {
+      margin-left: 1rem;
     }
   }
 `;
 
 export const NavBar = () => {
-  const [allRecipes, setRecipes] = useState<Recipe[]>([]);
+  const [allCategories, setCategories] = useState<ICategory[]>([]);
   useEffect(() => {
     const loadRecipes = async () => {
-
-      const res = await api.getAllRecipes();
-      console.log(res.data);
-      setRecipes(res.data);
+      const res = await api.getAllCategories();
+      setCategories(res.data);
     };
     loadRecipes();
   }, []);
+  // console.log(allCategories)
 
-  let categories: any = []
-//   categories = allRecipes.map((resipe) => resipe.category);
-
-// for(const category of categories){
-//     const test = !categories.find((objectCategory: any) => objectCategory.name == category)
-//     if (test){
-//         categories.push({name: category, amount: 1})
-//     }for (const ovbject of categories) {
-//         if(ovbject.name == category){
-//             ovbject.amount++
-//         }
-//     }
-
-// }
-  const setCategory = () => {
-  
-       categories = allRecipes.map((resipe) => resipe.category);
-       console.log(categories)
-    //    for(const category of categories){
-    //     const test = !categories.find((objectCategory: any) => objectCategory.name == category)
-    //     if (test){
-    //         categories.push({name: category, amount: 1})
-    //     }for (const ovbject of categories) {
-    //         if(ovbject.name == category){
-    //             ovbject.amount++
-    //         }
-    //     }
-    
-    // }
-  }
-  setCategory()
-console.log(categories)
-
-  const categoryList = allRecipes.map((recipe, index) => (
-    <li key={index}>{recipe.category}</li>
+  const categoryList = allCategories.map((category, index) => (
+    <Link to={`/category/${category._id}`} key={index}>
+      <li key={index}>
+        {category._id}
+        <p>({category.count})</p>
+      </li>
+    </Link>
   ));
 
   return (

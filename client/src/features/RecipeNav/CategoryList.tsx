@@ -1,11 +1,5 @@
-import { RecipeItem } from "./RecipeItem";
-import { Recipe } from "../../interface/recipes";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-
-// interface RecipeItemProps{
-// isLarge?: true | false
-// }
+import { RecipeItem } from "../Recipes/RecipeItem";
 
 const ListStyle = styled.div`
   display: flex;
@@ -14,7 +8,7 @@ const ListStyle = styled.div`
   overflow: scroll;
   width: 600px;
 
-  a{
+  a {
     text-decoration: none;
   }
 
@@ -35,17 +29,12 @@ const ListStyle = styled.div`
   }
 `;
 
-export const RecipeList = ({ recipeList }: any) => {
-  const recipes = recipeList;
-  // const {id} = useParams()
+export const CategoryList = ({recipe}: any) => {
   return (
     <>
       <ListStyle>
-        {recipes.map((recipe: any, index: number) => (
-          <Link to={`/recipe/${recipe._id}`} key={index} >
-            <RecipeItem key={index} resipe={recipe}></RecipeItem>
-          </Link>
-        ))}
+        <h1>category list</h1>
+        <RecipeItem recipe={recipe}/>
       </ListStyle>
     </>
   );

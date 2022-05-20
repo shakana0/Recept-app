@@ -1,4 +1,3 @@
-
 interface Ingredients {
   ingredient: string;
   amount: number;
@@ -12,14 +11,14 @@ interface Comments {
 }
 
 export interface Recipe {
-    title: string;
-    description: string;
-    imageUrl: string;
-    timeInMins: number;
-    ratings: Array<number>;
-    category: Array<string>;
-    ingredients: Array<Ingredients>;
-    instructions: Array<string>;
-    comments: Array<Comments>;
-  }
-  
+  _id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  timeInMins: number;
+  ratings: Array<number>;
+  category: Array<string>;
+  ingredients: Array<Ingredients>;
+  instructions: Array<string>;
+  comments: Array<Comments>;
+}

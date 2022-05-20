@@ -4,15 +4,29 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 
-const CardStyle = styled.article`
-  background-color: black;
-  width: 550px;
-  height: 220px;
+
+export default interface RecipeItemProps{
+isLarge?: true | false
+recipe?: any
+}
+
+const CardStyle = styled.article <RecipeItemProps>`
+  background-color: #000000cf;
+  width: ${ props => props.isLarge === true ? "550px" : "650px" };
+  height: ${ props => props.isLarge === true ? "220px" : "420px" };
+  /* width: 550px;
+  height: 220px; */
   color: white;
   margin: 1rem 0;
   display: flex;
   flex-direction: column;
+  transition: 0.25s ease;
+  border-radius: 20px;
 
+  &:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
 
   p {
     font-size: 0.9rem;
@@ -23,15 +37,18 @@ const CardStyle = styled.article`
   section {
     display: flex;
   }
-  .content{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 1rem;
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
 
+    img{
+      border-radius: 50px;
+    }
   }
   .text {
-      padding-left: 1rem;
+    padding-left: 1rem;
   }
   .info {
     display: flex;
@@ -47,14 +64,15 @@ const CardStyle = styled.article`
   }
 `;
 
-export const RecipeItem = ({resipe}: any) => {
+export const RecipeItem = ({ resipe}: any, {isLarge}: RecipeItemProps ) => {
   return (
-    <CardStyle>
+    <CardStyle isLarge={true}>
       <section className="content">
         <img
           src={resipe.imageUrl}
           alt="picture of coffee"
-          width={150} height={100}
+          width={150}
+          height={100}
         />
         <div className="text">
           <h2>{resipe.title}</h2>
