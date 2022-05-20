@@ -27,19 +27,17 @@ export const deleteRecipeById = async (recipeId: string) => {
 
 /*Category*/
 
-
 //hämstar alla kategorier
 export const getCategories = async () => {
   // return await RecipeModel.find().distinct("category");
   // categories = allRecipes.map((resipe) => resipe.category);
   const categories = await RecipeModel.aggregate([
     { $match: {} },
-    { $unwind: '$category' },
-    { $group: { _id: '$category', count: { $sum: 1 } } },
-    { $sort: { count: -1 } }
-]);
-return categories
-
+    { $unwind: "$category" },
+    { $group: { _id: "$category", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+  ]);
+  return categories;
 };
 
 //hämtar alla recepten för en kategori
@@ -56,10 +54,34 @@ export const getRecipesBySearch = async (search: string) => {
   return recipes;
 };
 
-//hämtar kategori vid search
-export const getRecepiesByCategorySearch = async (category: string) => {
-  const recipes = await RecipeModel.find({
-    category: { $regex: category, $options: "i" },
+export const getRecipeInCategory = async (
+  category: String,
+  recipeTitle: String
+) => {
+  const foundRecipe = await RecipeModel.find({
+    category: category,
+    title: { $regex: recipeTitle, $options: "i" },
   });
-  return recipes;
+  return foundRecipe;
+};
+
+export const postRating = async (recipeId: String, rating: Number) => {
+  //const newRating = await RecipeModel.find({
+  //   _id: recipeId,
+  // },
+  // {$push: {ratings: rating}}
+  // );
+  // await newRating.save();
+  //return newRating;
+
+  console.log(rating)
+
+  const newRating = await RecipeModel.findById(recipeId)
+        if (!newRating){
+            throw '404'
+        }else {
+          newRating.ratings.push(rating)
+            await newRating.save()
+            return newRating;
+        }
 };

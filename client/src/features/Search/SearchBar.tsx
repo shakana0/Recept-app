@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState, useEffect } from "react";
-import * as api from "../../api/index"
 const InputStyle = styled.input`
   background-color: transparent;
   border: none;
@@ -14,7 +12,6 @@ const InputStyle = styled.input`
 `;
 const SearchStyle = styled.div`
   width: 300px;
-  /* height: 50px; */
   background-color: transparent;
   border: 2px solid white;
   border-radius: 10px;
@@ -31,30 +28,16 @@ const SearchStyle = styled.div`
   }
 `;
 
-export const SearchBar = () => {
-  const [inputValue, setInputValue] = useState('')
-  const [recipes, setRecipes] = useState<any>([])
-  const inputHandler = (text: string) => {
-    setInputValue(text)
-  };
-  console.log( inputValue);
+interface SearchProp{
+  bytText?: any
+}
 
-  useEffect(() => {
-    const loadRecipes = async () => {
-      const res = await api.getBySearchTitle(inputValue);
-      setRecipes(res.data);
-      // jag är bäst
-      console.log(res.data);
-    };
-    loadRecipes();
-  }, []); 
-  console.log(recipes)
-   return (
+export const SearchBar = ({bytText} : SearchProp) => {
+  return (
     <>
       <SearchStyle className="search">
         <SearchIcon className="search-icon" />
-        <InputStyle onChange={(event) => inputHandler(event.target.value)}/>
-        {/* <button>Search</button> */}
+        <InputStyle type="text" onChange={bytText} />
       </SearchStyle>
     </>
   );

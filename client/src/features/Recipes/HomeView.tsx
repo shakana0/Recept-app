@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Category } from "@mui/icons-material";
 import { Recipe } from "../../interface/recipes";
 import { RecipeList } from "./RecipeList";
-import {SearchBar} from '../Search/SearchBar'
+import { SearchBar } from "../Search/SearchBar";
 
 const HomeStyle = styled.main`
   display: flex;
@@ -15,18 +15,27 @@ const HomeStyle = styled.main`
 
 export const Home = () => {
   const [allRecipes, setRecipes] = useState<Recipe[]>([]);
+  const [inputValue, setInputValue] = useState("");
+
+  const changeText = (event: any) => setInputValue(event.target.value);
+
   useEffect(() => {
     const loadRecipes = async () => {
-      const res = await api.getAllRecipes();
-      setRecipes(res.data);
+      if (inputValue.length > 0) {
+        const res = await api.getBySearchTitle(inputValue);
+        setRecipes(res.data);
+      } else {
+        const res = await api.getAllRecipes();
+        setRecipes(res.data);
+      }
     };
     loadRecipes();
-  }, []);
+  }, [inputValue]);
 
   return (
     <>
       <HomeStyle>
-        <SearchBar/>
+        <SearchBar bytText={changeText} />
         <RecipeList recipeList={allRecipes} />
       </HomeStyle>
     </>

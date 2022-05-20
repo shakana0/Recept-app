@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { postRecipe, getAllRecipes, getRecipeById, deleteRecipeById, getRecipesBySearch } from "../db/recipeCrud";
+import { postRecipe, getAllRecipes, getRecipeById, deleteRecipeById, getRecipesBySearch, postRating } from "../db/recipeCrud";
 
 const router = express.Router();
 
@@ -30,6 +30,11 @@ router.delete('/:id', async (req: Request, res: Response) =>{
   router.get('/search/:query', async (req: Request, res: Response) =>{
     const recipes = await getRecipesBySearch(req.params.query);
     res.json(recipes)
+});
+
+router.post("/:id/ratings", async (req: Request, res: Response) => {
+  const postedRating = await postRating(req.params.id, req.body.ratings);
+  res.status(201).json(postedRating);
 });
 
 export default router;

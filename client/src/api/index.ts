@@ -49,16 +49,23 @@ export const getBySearchTitle = async (searchQuery: string) => {
     return error.response;
   }
 };
-// export async function getRecipesByCategoryAndSearch(
-//   category: string,
-//   searchQuery: string
-// ) {
-//   try {
-//     const response = await axios.get(
-//       `/category/${category}/recipes/?search=${searchQuery}`
-//     );
-//     return response;
-//   } catch (error: any) {
-//     return error.response;
-//   }
-// };
+export const getRecipesByCategoryAndSearch = async(
+  category: string,
+  searchQuery: string
+) =>{
+  try {
+    const response = await axios.get( `/category/${category}/${searchQuery}`);
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const postRating = async(recepieId: string, rating: object) =>{
+try{
+  const postedRating = await axios.post( `/recipes/${recepieId}/ratings`, rating)
+  return postedRating
+}catch(error: any){
+  return error.response;
+}
+}

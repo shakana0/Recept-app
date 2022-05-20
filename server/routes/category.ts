@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { getCategories, getRecepiesCategory, getRecepiesByCategorySearch } from "../db/recipeCrud";
+import { getCategories, getRecepiesCategory, getRecipeInCategory } from "../db/recipeCrud";
 
 const router = express.Router()
 
@@ -16,11 +16,14 @@ router.get('/:category', async (req: Request, res: Response) =>{
 });
 
 //söker på kategori namn
-router.get('/:categoryName/recipes', async (req: Request, res: Response) =>{
-    const recipes = await getRecepiesByCategorySearch(req.params.categoryName);
-    res.status(200).json(recipes)
-});
+// router.get('/:categoryName/recipes', async (req: Request, res: Response) =>{
+//     const recipes = await getRecepiesByCategorySearch(req.params.categoryName);
+//     res.status(200).json(recipes)
+// });
 
-
+router.get('/:categoryName/:query', async (req, res) => {
+    const category = await getRecipeInCategory(req.params.categoryName, req.params.query)
+    res.status(200).json(category)
+})
 
 export default router;

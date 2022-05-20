@@ -2,6 +2,7 @@ import { RecipeItem } from "./RecipeItem";
 import { Recipe } from "../../interface/recipes";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
+import {SearchBar} from '../Search/SearchBar'
 
 // interface RecipeItemProps{
 // isLarge?: true | false
@@ -37,9 +38,13 @@ const ListStyle = styled.div`
 
 export const RecipeList = ({ recipeList }: any) => {
   const recipes = recipeList;
-  // const {id} = useParams()
+  // // const {id} = useParams()
+  // const eventHandler = (childData) ={}
+  // const 
+
   return (
     <>
+    {/* <SearchBar childData={eventHandler}/> */}
       <ListStyle>
         {recipes.map((recipe: any, index: number) => (
           <Link to={`/recipe/${recipe._id}`} key={index} >

@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import RecipeItemProps from "../Recipes/RecipeItem";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import { Recipe } from "../../interface/recipes";
+import { Rating } from "react-simple-star-rating";
+import { useState } from "react";
+import * as api from "../../api/index";
+import { useParams } from "react-router";
 
 const RecipeStyle = styled.article<RecipeItemProps>`
   background-color: #654637;
@@ -39,6 +42,16 @@ const RecipeStyle = styled.article<RecipeItemProps>`
 `;
 
 export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
+  const [rating, setRating] = useState(0); // initial rating value
+  const { id }: any = useParams();
+  console.log(id)
+  console.log(rating);
+  const handleRating = (rate: number) => {
+    const newRating = rate / 20
+    setRating(rate / 20);
+    api.postRating(id, { ratings: newRating });
+  };
+
   return (
     <>
       <RecipeStyle isLarge={false}>
@@ -61,17 +74,19 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
             <p>Antal minuter</p>
             <section className="instructions">
               <ul>
-                {recipe.ingrediensts && recipe.ingrediensts.map((ingredient: any, index: number) => (
-                  <li key={index}>
-                    {ingredient.ingredient}, {ingredient.amount}
-                    {ingredient.unit}
-                  </li>
-                ))}
+                {recipe.ingrediensts &&
+                  recipe.ingrediensts.map((ingredient: any, index: number) => (
+                    <li key={index}>
+                      {ingredient.ingredient}, {ingredient.amount}
+                      {ingredient.unit}
+                    </li>
+                  ))}
               </ul>
               <ol>
-                {recipe.instructions && recipe.instructions.map((step: string, index: number) => (
-                  <li key={index}>{step}</li>
-                ))}
+                {recipe.instructions &&
+                  recipe.instructions.map((step: string, index: number) => (
+                    <li key={index}>{step}</li>
+                  ))}
               </ol>
             </section>
             <div className="rating">
@@ -80,11 +95,15 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
                 <div className="devider"></div>
                 <p>Klicka på en stjärna för att ge betyg</p>
                 <div className="icons">
+                  {/* <StarOutlineIcon />
                   <StarOutlineIcon />
                   <StarOutlineIcon />
                   <StarOutlineIcon />
-                  <StarOutlineIcon />
-                  <StarOutlineIcon />
+                  <StarOutlineIcon /> */}
+                  <Rating
+                    onClick={handleRating}
+                    ratingValue={rating} /* Available Props */
+                  />
                 </div>
                 <div className="devider"></div>
               </section>
