@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { RecipeItem } from "../Recipes/RecipeItem";
+import { Link } from "react-router-dom";
 
 const ListStyle = styled.div`
   display: flex;
   flex-direction: column;
-  height: 600px;
+  height: 300px;
   overflow: scroll;
   width: 600px;
 
@@ -29,13 +30,22 @@ const ListStyle = styled.div`
   }
 `;
 
-export const CategoryList = ({recipe}: any) => {
+export const CategoryList = ({ recipeList }: any) => {
+  const recipes = recipeList;
+  // console.log(recipeList);
+ 
   return (
     <>
-      <ListStyle>
-        <h1>category list</h1>
-        <RecipeItem recipe={recipe}/>
-      </ListStyle>
+      {recipes && (
+        <ListStyle>
+          {
+            recipes.map((recipe: any, index: number) => (
+              <Link to={`/recipe/${recipe._id}`} key={index}>
+                <RecipeItem key={index} resipe={recipe}></RecipeItem>
+              </Link>
+            ))}
+        </ListStyle>
+      )}
     </>
   );
 };

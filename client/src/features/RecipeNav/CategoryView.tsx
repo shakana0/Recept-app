@@ -5,40 +5,32 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { CategoryList } from "./CategoryList";
 
-
-const ListStyle = styled.div`
-   display: flex;
+const ListStyle = styled.main`
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
+export const CategoryView = () => {
+  const [category, setCategory] = useState<any>([]);
 
-export const CategoryView = ({ recipeList }: any) => {
-    const recipes = recipeList;
-    const [category, setCategory] = useState<any>({})
-
-    const {categoryName}: any = useParams()
-    useEffect(() => {
-      const loadRecipes = async () => {
-        const res = await api.getSingleCategory(categoryName);
-        setCategory(res.data);
-        console.log(res.data)
-      };
-      loadRecipes();
-    }, []);
-    return (
-      <>
+  const { categoryName }: any = useParams();
+  useEffect(() => {
+    const loadRecipes = async () => {
+      const res = await api.getSingleCategory(categoryName);
+      setCategory(res.data);
+      // console.log(res.data);
+    };
+    loadRecipes();
+  }, [categoryName]);
+  return (
+    <>
+      {category && (
         <ListStyle>
-          {/* {recipes.map((recipe: any, index: number) => (
-            <Link to={`/recipe/${recipe._id}`} key={index} >
-              <RecipeItem key={index} resipe={recipe}></RecipeItem>
-            </Link>
-          ))} */}
-
-          <CategoryList recipe={category}/>
+          <CategoryList recipeList={category} />
         </ListStyle>
-      </>
-    );
-  };
-  
+      )}
+    </>
+  );
+};

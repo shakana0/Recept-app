@@ -39,8 +39,11 @@ export const getSingleCategory = async (category: string) => {
 };
 
 export const getBySearchTitle = async (searchQuery: string) => {
+  console.log(searchQuery)
   try {
     const response = await axios.get(`/recipes/search/${searchQuery}`);
+    console.log(response)
+
     return response;
   } catch (error: any) {
     return error.response;
