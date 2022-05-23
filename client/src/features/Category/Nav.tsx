@@ -32,11 +32,17 @@ const NavStyle = styled.nav`
       font-weight: 600;
       cursor: pointer;
     }
+    /* .current:focus{
+      color: yellow;
+    } */
 
     p {
       margin-left: 1rem;
     }
   }
+  .current:focus{
+      color: yellow;
+    }
 `;
 
 export const NavBar = () => {
@@ -50,7 +56,7 @@ export const NavBar = () => {
   }, []);
   const categoryList = allCategories.map((category, index) => (
     <Link to={`/category/${category._id}`} key={index}>
-      <li key={index}>
+      <li className="current" key={index}>
         {category._id}
         <p>({category.count})</p>
       </li>
@@ -62,6 +68,8 @@ export const NavBar = () => {
       <NavStyle>
         <h2>Kategorier</h2>
         <ul>{categoryList}</ul>
+        <button>click</button>
+
       </NavStyle>
     </>
   );
