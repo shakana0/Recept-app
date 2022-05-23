@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RecipeItem } from "../Recipes/RecipeItem";
+import { RecipeItem } from "../Home/RecipeItem";
 import { Link } from "react-router-dom";
 
 const ListStyle = styled.div`

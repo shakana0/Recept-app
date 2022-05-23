@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CoffeeMakerIcon from "@mui/icons-material/CoffeeMaker";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import { Button } from "./headerBtn";
+import { Button } from "./HeaderBtn";
 import { Link } from "react-router-dom";
 
 const HeaderStyle = styled.header`
@@ -11,7 +11,6 @@ const HeaderStyle = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  /* height: 80px; */
 
   svg {
     transition: 0.5s ease;

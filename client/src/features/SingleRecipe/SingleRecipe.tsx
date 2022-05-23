@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import RecipeItemProps from "../Recipes/RecipeItem";
+import RecipeItemProps from "../Home/RecipeItem";
 import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
 import * as api from "../../api/index";
