@@ -1,16 +1,65 @@
 import styled from "styled-components";
 import RecipeItemProps from "../Recipes/RecipeItem";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
 import * as api from "../../api/index";
 import { useParams } from "react-router";
+import { Comments } from "./Comments";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 
 const RecipeStyle = styled.article<RecipeItemProps>`
-  background-color: #654637;
+  background-color: #000000d3;
+  color: white;
+
   margin: 2rem auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
   width: ${(props) => (props.isLarge === true ? "550px" : "650px")};
   height: ${(props) => (props.isLarge === true ? "220px" : "620px")};
+
+  .content {
+    display: flex;
+    justify-content: center;
+
+    .recipe-info {
+      display: flex;
+      flex-direction: column;
+      padding-left: 2rem;
+
+      .time-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* padding: 0 1rem; */
+
+        p {
+          font-size: 0.8rem;
+        }
+        .devider {
+          border-left: 1px solid white;
+          height: 20px;
+          /* padding: 0 1rem; */
+        }
+
+        h2 {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .instructions {
+    display: flex;
+    justify-content: space-between;
+    > * {
+      width: 50%;
+      li {
+        margin: 0.6rem 0;
+      }
+    }
+  }
   img {
     width: ${(props) => (props.isLarge === true ? "150px" : "350px")};
     height: ${(props) => (props.isLarge === true ? "100px" : "320px")};
@@ -25,92 +74,120 @@ const RecipeStyle = styled.article<RecipeItemProps>`
     border-radius: 10px;
     width: 10px;
   }
-  div {
-    height: 100%;
-  }
-  .devider {
-    border-top: 1px solid white;
-    width: 60%;
-  }
-  .icons > * {
-    font-size: 2rem;
-    margin: 0 0.4rem;
-    &:hover {
-      color: #ffca0a;
+
+  .rating,
+  .rating-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .devider {
+      border-top: 1px solid white;
+      width: 90%;
+    }
+
+    .rating-info {
+      padding: 1rem 0;
+
+      h1 {
+        font-size: 1.6rem;
+        margin: 0;
+      }
+    }
+
+    .emoji-icon {
+      font-size: 3rem;
+      margin: 0 1rem;
+    }
+    .show {
+      display: block;
+      display: flex;
+      align-items: center;
+      height: 180px;
+    }
+    .hide {
+      display: none;
     }
   }
 `;
 
 export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
   const [rating, setRating] = useState(0); // initial rating value
+  const [showRating, setShowRating] = useState(false);
+
   const { id }: any = useParams();
-  console.log(id)
-  console.log(rating);
+
   const handleRating = (rate: number) => {
-    const newRating = rate / 20
+    const newRating = rate / 20;
     setRating(rate / 20);
     api.postRating(id, { ratings: newRating });
+    setShowRating(!showRating);
   };
-
   return (
     <>
       <RecipeStyle isLarge={false}>
-        <div>
-          <section className="content">
-            <img
-              src={recipe.imageUrl}
-              alt="picture of coffee"
-              width={350}
-              height={200}
-            />
-            <div className="text">
+        <section className="content">
+          <img
+            src={recipe.imageUrl}
+            alt="picture of coffee"
+            width={350}
+            height={200}
+          />
+          <section className="recipe-info">
+            <div>
               <h2>{recipe.title}</h2>
               <p>{recipe.description}</p>
             </div>
-          </section>
-          <section className="info">
-            <p>Antal ingredienser</p>
-            <div className="devider"></div>
-            <p>Antal minuter</p>
-            <section className="instructions">
-              <ul>
-                {recipe.ingrediensts &&
-                  recipe.ingrediensts.map((ingredient: any, index: number) => (
-                    <li key={index}>
-                      {ingredient.ingredient}, {ingredient.amount}
-                      {ingredient.unit}
-                    </li>
-                  ))}
-              </ul>
-              <ol>
-                {recipe.instructions &&
-                  recipe.instructions.map((step: string, index: number) => (
-                    <li key={index}>{step}</li>
-                  ))}
-              </ol>
-            </section>
-            <div className="rating">
-              <h1>Vad tyckte du om receptet?</h1>
-              <section className="rating-sec">
-                <div className="devider"></div>
-                <p>Klicka på en stjärna för att ge betyg</p>
-                <div className="icons">
-                  {/* <StarOutlineIcon />
-                  <StarOutlineIcon />
-                  <StarOutlineIcon />
-                  <StarOutlineIcon />
-                  <StarOutlineIcon /> */}
-                  <Rating
-                    onClick={handleRating}
-                    ratingValue={rating} /* Available Props */
-                  />
-                </div>
-                <div className="devider"></div>
-              </section>
+            <div className="time-info">
+              <p>Antal ingredienser</p>
+              <span>{recipe.ingrediensts && recipe.ingrediensts.length}</span>
+              <div className="devider"></div>
+              <p>Antal minuter</p>
+              <span>{recipe.timeInMins}</span>
             </div>
           </section>
-        </div>
+        </section>
+        <section className="info">
+          <section className="instructions">
+            <ul>
+              <h3>Ingredienser</h3>
+              {recipe.ingrediensts &&
+                recipe.ingrediensts.map((ingredient: any, index: number) => (
+                  <li key={index}>
+                    {ingredient.ingredient}, {ingredient.amount}
+                    {ingredient.unit}
+                  </li>
+                ))}
+            </ul>
+            <ol>
+              <h3>Tillagning</h3>
+              {recipe.instructions &&
+                recipe.instructions.map((step: string, index: number) => (
+                  <li key={index}>{step}</li>
+                ))}
+            </ol>
+          </section>
+          <section className="rating">
+            <div className="devider"></div>
+            <div className={showRating ? "hide" : "show"}>
+              <div className="rating-info">
+              <h1>Vad tyckte du om receptet?</h1>
+              <p>Klicka på en stjärna för att ge betyg</p>
+              <Rating onClick={handleRating} ratingValue={rating} />
+            </div>
+            </div>
+
+            <div className={showRating ? "show" : "hide"}>
+              <h2>Tack för ditt betyg</h2>
+              <EmojiEmotionsIcon className="emoji-icon" />
+            </div>
+
+            <div className="devider"></div>
+          </section>
+        </section>
       </RecipeStyle>
+      <Comments commentsProp={recipe.comments} />
     </>
   );
 };

@@ -4,7 +4,7 @@ interface Ingredients {
   unit: string;
 }
 
-interface Comments {
+ interface Comments {
   comment: string;
   name: string;
   createdAt: Date;

@@ -21,20 +21,14 @@ const ListStyle = styled.div`
   ::-webkit-scrollbar-thumb {
     background-color: #b47d63;
     border-radius: 10px;
-    /* height: 20px; */
     width: 10px;
   }
-  ::-webkit-scrollbar-track {
-    /* background-color: transparent;
-  height: 0px; */
-  }
+
 `;
 
 export const CategoryList = ({ recipeList }: any) => {
   const recipes = recipeList;
-  // console.log(recipeList);
- 
-  return (
+   return (
     <>
       {recipes && (
         <ListStyle>

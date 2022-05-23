@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 
 interface Ingredients {
   ingredient: string;
@@ -6,7 +6,7 @@ interface Ingredients {
   unit: string;
 }
 
-interface Comments extends Document {
+export interface Comments{
   comment: string;
   name: string;
   createdAt: Date;
@@ -23,20 +23,6 @@ export interface Recipe {
   instructions: Array<string>;
   comments: Array<Comments>;
 }
-
-// const ingredientsSchema = new Schema<Ingredients>({
-//   ingredient: String,
-//   amount: Number,
-//   unit: String,
-// });
-// const IngredientsModel = model<Ingredients>("Ingredients", ingredientsSchema);
-
-// const commentsSchema = new Schema<Comments>({
-//   comment: { type: String, required: true },
-//   name: { type: String, required: true },
-//   createdAt: { type: Date, required: true },
-// });
-// const CommentsModel = model<Comments>("Comments", commentsSchema);
 
 const schema = new Schema<Recipe>({
   title: { type: String, required: true },

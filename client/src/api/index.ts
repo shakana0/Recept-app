@@ -69,3 +69,15 @@ try{
   return error.response;
 }
 }
+
+export const postComment = async(recepieId: string, comment: object) =>{
+  try{
+    const postedComment = await axios.post( `/recipes/${recepieId}/comments`, comment)
+    console.log(comment)
+    console.log(postedComment)
+
+    return postedComment
+  }catch(error: any){
+    return error.response;
+  }
+  }

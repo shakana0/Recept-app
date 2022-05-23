@@ -1,4 +1,4 @@
-import RecipeModel, { Recipe } from "./models/recipes";
+import RecipeModel, { Recipe, Comments } from "./models/recipes";
 
 export const postRecipe = async (recepie: Recipe) => {
   const newRecipe = new RecipeModel(recepie);
@@ -66,22 +66,25 @@ export const getRecipeInCategory = async (
 };
 
 export const postRating = async (recipeId: String, rating: Number) => {
-  //const newRating = await RecipeModel.find({
-  //   _id: recipeId,
-  // },
-  // {$push: {ratings: rating}}
-  // );
-  // await newRating.save();
-  //return newRating;
+  const newRating = await RecipeModel.findById(recipeId);
+  if (!newRating) {
+    throw "404";
+  } else {
+    newRating.ratings.push(rating);
+    await newRating.save();
+    return newRating;
+  }
+};
 
-  console.log(rating)
-
-  const newRating = await RecipeModel.findById(recipeId)
-        if (!newRating){
-            throw '404'
-        }else {
-          newRating.ratings.push(rating)
-            await newRating.save()
-            return newRating;
-        }
+export const postComment = async (recipeId: String, comment: Comments) => {
+  const newComment = await RecipeModel.findById(recipeId);
+  if (!newComment) {
+    throw "404";
+  } else {
+    newComment.comments.push(comment);
+    await newComment.save();
+    // console.log(comment)
+    // console.log(newComment)
+    return newComment;
+  }
 };
