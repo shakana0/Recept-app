@@ -53,27 +53,27 @@ const CommentsStyle = styled.article`
       }
     }
   }
-  ul{
+  ul {
     box-sizing: border-box;
     padding: 0 2rem;
     height: 200px;
     overflow: scroll;
 
     ::-webkit-scrollbar {
-    background-color: black;
-    width: 10px;
-  }
+      background-color: black;
+      width: 10px;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    background-color: black;
-    border-radius: 10px;
-    width: 10px;
-  }
-    li{
-      padding: .5rem;
+    ::-webkit-scrollbar-thumb {
+      background-color: black;
+      border-radius: 10px;
+      width: 10px;
+    }
+    li {
+      padding: 0.5rem;
       background-color: #ffffffd7;
       color: black;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       border-radius: 10px;
     }
   }
@@ -85,10 +85,19 @@ export const Comments = ({ commentsProp }: any) => {
     name: "",
     createdAt: new Date(),
   });
+  const [showComment, setShowComment] = useState(true);
 
   const { id }: any = useParams();
   const handleSubmit = () => {
     api.postComment(id, newComment);
+  };
+
+  const render = () => {
+    if (showComment) {
+      <h1>Hej</h1>;
+    } else {
+      <h1>Då</h1>;
+    }
   };
 
   return (
@@ -116,6 +125,8 @@ export const Comments = ({ commentsProp }: any) => {
             </button>
           </div>
         </form>
+        {/* <render/> */}
+        {/* {render} */}
         <ul>
           {commentsProp &&
             commentsProp.map((comment: any, index: number) => (
