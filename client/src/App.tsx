@@ -1,15 +1,10 @@
 import React from "react";
 import "./App.css";
 import { Header } from "./features/Header/Header";
-
-// import { Home } from "./features/Recipes/HomeView";
 import { Home } from "./features/Home/HomeView";
-
 import { NavBar } from "./features/Category/Nav";
 import { CategoryView } from "./features/Category/CategoryView";
-
 import { RecipeView } from "./features/SingleRecipe/SingleRecipeView";
-
 import { Routes, Route } from 'react-router-dom';
 
 function App() {

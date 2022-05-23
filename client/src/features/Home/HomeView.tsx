@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import * as api from "../../api/index";
 import styled from "styled-components";
-import { Category } from "@mui/icons-material";
 import { Recipe } from "../../interface/recipes";
 import { RecipeList } from "./RecipeList";
 import { SearchBar } from "../Search/SearchBar";
@@ -35,7 +34,7 @@ export const Home = () => {
   return (
     <>
       <HomeStyle>
-        <SearchBar bytText={changeText} />
+        <SearchBar changeText={changeText} />
         <RecipeList recipeList={allRecipes} />
       </HomeStyle>
     </>

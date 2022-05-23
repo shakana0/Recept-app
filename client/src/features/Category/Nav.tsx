@@ -48,8 +48,6 @@ export const NavBar = () => {
     };
     loadRecipes();
   }, []);
-  // console.log(allCategories)
-
   const categoryList = allCategories.map((category, index) => (
     <Link to={`/category/${category._id}`} key={index}>
       <li key={index}>

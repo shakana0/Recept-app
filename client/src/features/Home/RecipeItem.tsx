@@ -1,4 +1,3 @@
-import { Recipe } from "../../interface/recipes";
 import styled from "styled-components";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
@@ -14,8 +13,7 @@ const CardStyle = styled.article <RecipeItemProps>`
   background-color: #000000cf;
   width: ${ props => props.isLarge === true ? "550px" : "650px" };
   height: ${ props => props.isLarge === true ? "220px" : "420px" };
-  /* width: 550px;
-  height: 220px; */
+
   color: white;
   margin: 1rem 0;
   display: flex;

@@ -29,15 +29,15 @@ const SearchStyle = styled.div`
 `;
 
 interface SearchProp{
-  bytText?: any
+  changeText?: any
 }
 
-export const SearchBar = ({bytText} : SearchProp) => {
+export const SearchBar = ({changeText} : SearchProp) => {
   return (
     <>
       <SearchStyle className="search">
         <SearchIcon className="search-icon" />
-        <InputStyle type="text" onChange={bytText} />
+        <InputStyle type="text" onChange={changeText} />
       </SearchStyle>
     </>
   );

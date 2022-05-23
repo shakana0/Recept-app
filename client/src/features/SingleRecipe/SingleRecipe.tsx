@@ -33,7 +33,6 @@ const RecipeStyle = styled.article<RecipeItemProps>`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* padding: 0 1rem; */
 
         p {
           font-size: 0.8rem;
@@ -41,7 +40,6 @@ const RecipeStyle = styled.article<RecipeItemProps>`
         .devider {
           border-left: 1px solid white;
           height: 20px;
-          /* padding: 0 1rem; */
         }
 
         h2 {
@@ -148,7 +146,6 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
             </div>
           </section>
         </section>
-        <section className="info">
           <section className="instructions">
             <ul>
               <h3>Ingredienser</h3>
@@ -177,15 +174,12 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
               <Rating onClick={handleRating} ratingValue={rating} />
             </div>
             </div>
-
             <div className={showRating ? "show" : "hide"}>
               <h2>Tack för ditt betyg</h2>
               <EmojiEmotionsIcon className="emoji-icon" />
             </div>
-
             <div className="devider"></div>
           </section>
-        </section>
       </RecipeStyle>
       <Comments commentsProp={recipe.comments} />
     </>

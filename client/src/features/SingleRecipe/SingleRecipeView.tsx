@@ -3,14 +3,12 @@ import * as api from "../../api/index";
 import styled from "styled-components";
 import { SingelRecipe } from "./SingleRecipe";
 import { useParams } from "react-router";
-import { Recipe } from "../../interface/recipes";
 
 const RecipeViewStyle = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow: scroll; */
 `;
 
 export const RecipeView = () => {

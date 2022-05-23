@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import * as api from "../../api/index";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { CategoryList } from "./CategoryList";
 import { SearchBar } from "../Search/SearchBar";
@@ -38,7 +37,7 @@ export const CategoryView = () => {
     <>
       {category && (
         <ListStyle>
-          <SearchBar bytText={changeText} />
+          <SearchBar changeText={changeText} />
           <CategoryList recipeList={category} />
         </ListStyle>
       )}
