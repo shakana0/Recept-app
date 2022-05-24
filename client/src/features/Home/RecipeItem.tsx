@@ -63,6 +63,14 @@ const CardStyle = styled.article <RecipeItemProps>`
 `;
 
 export const RecipeItem = ({ resipe}: any, {isLarge}: RecipeItemProps ) => {
+  console.log(resipe.ratings)
+  const getAverage = () =>{
+    // const average = resipe.ratings.reduce()
+    // const sumWithInitial = array1.reduce(
+    //   (previousValue, currentValue) => previousValue + currentValue,
+    //   initialValue
+    // );
+  }
   return (
     <CardStyle isLarge={true}>
       <section className="content">

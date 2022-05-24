@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { ICategory } from "../../interface/category";
-import { Category } from "@mui/icons-material";
 import * as api from "../../api/index";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavStyle = styled.nav`
   background-color: #100703;
-  /* height: 600px; */
   width: 200px;
   height: 100%;
   color: white;
@@ -32,17 +30,10 @@ const NavStyle = styled.nav`
       font-weight: 600;
       cursor: pointer;
     }
-    /* .current:focus{
-      color: yellow;
-    } */
-
     p {
       margin-left: 1rem;
     }
   }
-  .current:focus{
-      color: yellow;
-    }
 `;
 
 export const NavBar = () => {
@@ -55,12 +46,14 @@ export const NavBar = () => {
     loadRecipes();
   }, []);
   const categoryList = allCategories.map((category, index) => (
-    <Link to={`/category/${category._id}`} key={index}>
-      <li className="current" key={index}>
+    <NavLink to={`/category/${category._id}`} key={index}  style={({isActive})=> ({
+      color: isActive ? '#e17f1d' : '#fff'
+    })}>
+      <li key={index}>
         {category._id}
         <p>({category.count})</p>
       </li>
-    </Link>
+    </NavLink>
   ));
 
   return (
@@ -68,8 +61,6 @@ export const NavBar = () => {
       <NavStyle>
         <h2>Kategorier</h2>
         <ul>{categoryList}</ul>
-        <button>click</button>
-
       </NavStyle>
     </>
   );

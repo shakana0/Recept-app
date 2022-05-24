@@ -27,6 +27,9 @@ const ListStyle = styled.div`
 `;
 
 export const CategoryList = ({ recipeList }: any) => {
+
+ 
+
   const recipes = recipeList;
    return (
     <>
@@ -34,7 +37,7 @@ export const CategoryList = ({ recipeList }: any) => {
         <ListStyle>
           {
             recipes.map((recipe: any, index: number) => (
-              <Link to={`/recipe/${recipe._id}`} key={index}>
+              <Link to={`/recipe/${recipe._id}`} key={index}  >
                 <RecipeItem key={index} resipe={recipe}></RecipeItem>
               </Link>
             ))}

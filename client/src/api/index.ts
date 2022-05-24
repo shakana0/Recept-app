@@ -1,5 +1,7 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3030";
+// axios.defaults.baseURL = "http://localhost:3030";
+axios.defaults.baseURL = "https://kaffe-app.herokuapp.com";
+
 
 export const getAllRecipes = async () => {
   try {
