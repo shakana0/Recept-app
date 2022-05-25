@@ -172,6 +172,7 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
               <h1>Vad tyckte du om receptet?</h1>
               <p>Klicka på en stjärna för att ge betyg</p>
               <Rating onClick={handleRating} ratingValue={rating} />
+              <p>{recipe.ratings && recipe.ratings.length} omdömen</p>
             </div>
             </div>
             <div className={showRating ? "show" : "hide"}>
