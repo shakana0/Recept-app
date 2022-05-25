@@ -83,8 +83,6 @@ export const postComment = async (recipeId: String, comment: Comments) => {
   } else {
     newComment.comments.push(comment);
     await newComment.save();
-    // console.log(comment)
-    // console.log(newComment)
     return newComment;
   }
 };

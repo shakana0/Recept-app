@@ -1,18 +1,15 @@
 import styled from "styled-components";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
-import StarHalfIcon from "@mui/icons-material/StarHalf";
 
-
-export default interface RecipeItemProps{
-isLarge?: true | false
-recipe?: any
+export default interface RecipeItemProps {
+  isLarge?: true | false;
+  recipe?: any;
 }
 
-const CardStyle = styled.article <RecipeItemProps>`
+const CardStyle = styled.article<RecipeItemProps>`
   background-color: #000000cf;
-  width: ${ props => props.isLarge === true ? "550px" : "650px" };
-  height: ${ props => props.isLarge === true ? "220px" : "420px" };
+  width: ${(props) => (props.isLarge === true ? "550px" : "650px")};
+  height: ${(props) => (props.isLarge === true ? "220px" : "420px")};
 
   color: white;
   margin: 1rem 0;
@@ -41,7 +38,7 @@ const CardStyle = styled.article <RecipeItemProps>`
     align-items: center;
     padding: 0 1rem;
 
-    img{
+    img {
       border-radius: 50px;
     }
   }
@@ -52,6 +49,15 @@ const CardStyle = styled.article <RecipeItemProps>`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 0.6rem;
+      }
+    }
   }
   .devider {
     border-left: 1px solid white;
@@ -62,39 +68,41 @@ const CardStyle = styled.article <RecipeItemProps>`
   }
 `;
 
-export const RecipeItem = ({ resipe}: any, {isLarge}: RecipeItemProps ) => {
-  console.log(resipe.ratings)
-  const getAverage = () =>{
-    // const average = resipe.ratings.reduce()
-    // const sumWithInitial = array1.reduce(
-    //   (previousValue, currentValue) => previousValue + currentValue,
-    //   initialValue
-    // );
-  }
+export const RecipeItem = ({ recipe, isLarge }: RecipeItemProps) => {
+  const average = recipe.ratings
+    .reduce((accumulator: number, currentValue: number) => {
+      return accumulator + currentValue / recipe.ratings.length;
+    }, 0)
+    .toFixed(1);
+
   return (
     <CardStyle isLarge={true}>
       <section className="content">
         <img
-          src={resipe.imageUrl}
+          src={recipe.imageUrl}
           alt="picture of coffee"
           width={150}
           height={100}
         />
         <div className="text">
-          <h2>{resipe.title}</h2>
-          <p>{resipe.description}</p>
+          <h2>{recipe.title}</h2>
+          <p>{recipe.description}</p>
         </div>
       </section>
       <section className="info">
-        <p>Antal ingredienser</p>
+        <div>
+          <p>Antal ingredienser</p>
+          <span>{recipe.ingrediensts && recipe.ingrediensts.length}</span>
+        </div>
+
         <div className="devider"></div>
-        <p>Antal minuter</p>
+        <div>
+          <p>Antal minuter</p>
+          <span>{recipe.timeInMins}</span>
+        </div>
         <div className="star-icons">
+          <span>{average}</span>
           <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarHalfIcon />
-          <StarOutlineIcon />
         </div>
       </section>
     </CardStyle>

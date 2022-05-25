@@ -35,7 +35,7 @@ export const Home = () => {
     <>
       <HomeStyle>
         <SearchBar changeText={changeText} />
-        <RecipeList recipeList={allRecipes} />
+        <RecipeList recipeList={allRecipes} isLarge={true}/>
       </HomeStyle>
     </>
   );

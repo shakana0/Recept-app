@@ -2,10 +2,16 @@ import { RecipeItem } from "./RecipeItem";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const ListStyle = styled.div`
+export default interface RecipeItemProps {
+  isLarge?: true | false;
+  recipeList?: any
+}
+
+const ListStyle = styled.div<RecipeItemProps>`
   display: flex;
   flex-direction: column;
-  height: 600px;
+   height: ${(props) => (props.isLarge === true ? "600px" : "300px")}; 
+   /* height: 600px;  */
   overflow: scroll;
   width: 600px;
 
@@ -26,14 +32,13 @@ const ListStyle = styled.div`
 
 `;
 
-export const RecipeList = ({ recipeList }: any) => {
-  const recipes = recipeList;
+export const RecipeList = ({ recipeList, isLarge }:RecipeItemProps ) => {
   return (
     <>
-      <ListStyle>
-        {recipes.map((recipe: any, index: number) => (
+      <ListStyle isLarge={isLarge}>
+        {recipeList.map((recipe: any, index: number) => (
           <Link to={`/recipe/${recipe._id}`} key={index}>
-            <RecipeItem key={index} resipe={recipe}></RecipeItem>
+            <RecipeItem key={index} recipe={recipe}></RecipeItem>
           </Link>
         ))}
       </ListStyle>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as api from "../../api/index";
 import styled from "styled-components";
 import { useParams } from "react-router";
-import { CategoryList } from "./CategoryList";
+import { RecipeList } from "../Home/RecipeList";
 import { SearchBar } from "../Search/SearchBar";
 
 const ListStyle = styled.main`
@@ -38,7 +38,7 @@ export const CategoryView = () => {
       {category && (
         <ListStyle>
           <SearchBar changeText={changeText} />
-          <CategoryList recipeList={category} />
+          <RecipeList recipeList={category} isLarge={false} />
         </ListStyle>
       )}
     </>
