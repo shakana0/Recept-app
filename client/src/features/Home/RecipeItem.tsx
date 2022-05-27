@@ -92,7 +92,7 @@ export const RecipeItem = ({ recipe, isLarge }: RecipeItemProps) => {
       <section className="info">
         <div>
           <p>Antal ingredienser</p>
-          <span>{recipe.ingrediensts && recipe.ingrediensts.length}</span>
+          <span>{recipe.ingredients && recipe.ingredients.length}</span>
         </div>
 
         <div className="devider"></div>

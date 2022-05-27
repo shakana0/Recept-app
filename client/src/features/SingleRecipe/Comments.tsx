@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import * as api from "../../api/index";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useParams } from "react-router";
 
 const CommentsStyle = styled.article`
@@ -53,7 +54,7 @@ const CommentsStyle = styled.article`
       }
     }
   }
-  ul {
+  .comments-style {
     box-sizing: border-box;
     padding: 0 2rem;
     height: 200px;
@@ -82,8 +83,23 @@ const CommentsStyle = styled.article`
     align-items: center;
     justify-content: center;
 
-    .emoji-icon{
+    .emoji-icon {
       font-size: 3rem;
+    }
+  }
+  .error-style {
+    div {
+      display: flex;
+      align-items: center;
+      li {
+        color: red;
+        list-style: none;
+        margin-left: .3rem;
+      }
+      .error-icon {
+        color: red;
+        font-size: 1.5rem;
+      }
     }
   }
 `;
@@ -95,6 +111,7 @@ export const Comments = ({ commentsProp }: any) => {
     createdAt: new Date(),
   });
   const [showComment, setShowComment] = useState(true);
+  const [formError, setFormError] = useState<string[]>([]);
   const { id }: any = useParams();
 
   let error: any = [];
@@ -107,16 +124,19 @@ export const Comments = ({ commentsProp }: any) => {
     if (newComment.name === "") {
       error.push("skriv ditt namn tack");
     }
-    else {
+    if(!error.length){
       api.postComment(id, newComment)
+      handleComment();
     }
-    handleComment();
+    setFormError(error);
+    console.log(formError);
   };
 
   const handleComment = () => {
     setShowComment(!showComment);
   };
-  const render = () => {
+
+  const renderCommentForm = () => {
     if (showComment) {
       return (
         <form onSubmit={handleSubmit}>
@@ -157,8 +177,18 @@ export const Comments = ({ commentsProp }: any) => {
     <>
       <CommentsStyle>
         <h2>Kommentarer</h2>
-        {render()}
-        <ul>
+        {renderCommentForm()}
+        <ul className="error-style">
+          {formError &&
+            formError.map((error: string, index: number) => (
+              <div key={index}>
+                <ErrorOutlineIcon className="error-icon" />
+                <li>{error}</li>
+              </div>
+            ))}
+        </ul>
+
+        <ul className="comments-style">
           {commentsProp &&
             commentsProp.map((comment: any, index: number) => (
               <li key={index}>

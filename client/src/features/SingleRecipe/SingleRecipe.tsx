@@ -139,7 +139,7 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
             </div>
             <div className="time-info">
               <p>Antal ingredienser</p>
-              <span>{recipe.ingrediensts && recipe.ingrediensts.length}</span>
+              <span>{recipe.ingredients && recipe.ingredients.length}</span>
               <div className="devider"></div>
               <p>Antal minuter</p>
               <span>{recipe.timeInMins}</span>
@@ -149,8 +149,8 @@ export const SingelRecipe = ({ isLarge, recipe }: RecipeItemProps) => {
           <section className="instructions">
             <ul>
               <h3>Ingredienser</h3>
-              {recipe.ingrediensts &&
-                recipe.ingrediensts.map((ingredient: any, index: number) => (
+              {recipe.ingredients &&
+                recipe.ingredients.map((ingredient: any, index: number) => (
                   <li key={index}>
                     {ingredient.ingredient}, {ingredient.amount}
                     {ingredient.unit}
