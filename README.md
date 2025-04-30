@@ -68,6 +68,7 @@ The app is being redesigned in Figma with the following pages:
 
 ### 📲 Café Mundo Home Mobile View
 <img src="client/src/assets/img/Home Mobile.png" alt="Quiz Dashboard" width="300" />
+
 ---
 
 ## 🚧 Status
